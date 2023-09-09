@@ -8,6 +8,14 @@ async function create(flight) {
     );
 }
 
+async function findFlightById(id){
+    const flight = await db.query(
+        `SELECT * FROM flights WHERE id = $1`, [id]
+    );
+    return flight;    
+}
+
 export const flightsRepository = {
     create,
+    findFlightById
 };

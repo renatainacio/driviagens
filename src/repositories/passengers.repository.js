@@ -8,6 +8,14 @@ async function create(passenger) {
     );
 }
 
+async function findPassengerById(id){
+    const passenger = await db.query(
+        `SELECT * FROM passengers WHERE id = $1`, [id]
+    );
+    return passenger;    
+}
+
 export const passengersRepository = {
-    create
+    create,
+    findPassengerById
 };
