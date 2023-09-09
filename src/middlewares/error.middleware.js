@@ -6,5 +6,8 @@ export default function errorHandler(error, req, res, next) {
     if (error.type === "invalidFormat")
         return res.status(httpStatus.UNPROCESSABLE_ENTITY).send(error.message);
 
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).send("Something went wrong.")
+    if (error.type === "conflict")
+        return res.status(httpStatus.CONFLICT).send(error.message);
+
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).send("Something went wrong.")
 }
