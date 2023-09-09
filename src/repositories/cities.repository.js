@@ -13,7 +13,16 @@ async function findCityByName(cityName) {
     return city;
 }
 
+async function findCityById(id){
+    const city = await db.query(
+        `SELECT name FROM cities WHERE id = $1`, [id]
+    );
+    return city;    
+}
+
+
 export const citiesRepository = {
     create,
-    findCityByName
+    findCityByName,
+    findCityById
 };
