@@ -15,7 +15,7 @@ async function findFlightById(id){
     return flight;    
 }
 
-async function getAllFlights(origin, destination, biggerDate, smallerDate){
+async function getAllFlights(origin, destination, biggerDate, smallerDate, page){
     let sql = "";
     let values = [];
     if (origin) {
