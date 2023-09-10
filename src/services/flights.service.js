@@ -9,6 +9,7 @@ import joiBase from 'joi';
 import joiDate from '@joi/date';
 import { invalidFilterDate } from "../errors/invalidFilterDate.js";
 import { biggerDateBeforeSmaller } from "../errors/biggerDateBeforeSmaller.js";
+import { invalidPageValue } from "../errors/invalidPageValue.js";
 
 async function create(flight) {
     if (flight.origin === flight.destination) throw conflictError("Voo");
