@@ -10,6 +10,7 @@ import joiDate from '@joi/date';
 import { invalidFilterDate } from "../errors/invalidFilterDate.js";
 import { biggerDateBeforeSmaller } from "../errors/biggerDateBeforeSmaller.js";
 import { invalidPageValue } from "../errors/invalidPageValue.js";
+import { invalidDateNewFlight } from "../errors/invalidDateNewFlight.js";
 
 async function create(flight) {
     if (flight.origin === flight.destination) throw conflictError("Voo");
@@ -19,7 +20,7 @@ async function create(flight) {
     if (destination.rows.length === 0) throw notFoundError("Destino");
     dayjs.extend(customParseFormat);
     flight.date = dayjs(flight.date, "DD-MM-YYYY");
-    if (flight.date.diff(dayjs(new Date())) < 0) throw invalidFormatError("Data anterior");
+    if (flight.date.diff(dayjs(new Date())) < 0) throw invalidDateNewFlight();
     await flightsRepository.create(flight);
 }
 
