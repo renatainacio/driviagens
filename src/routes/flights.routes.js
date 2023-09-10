@@ -7,5 +7,6 @@ import flightsController from "../controllers/flights.controller.js";
 const flightsRouter = Router();
 
 flightsRouter.post("/flights", validateSchema(flightSchema, "voo"), flightsController.create);
+flightsRouter.get("/flights", flightsController.getAllFlights);
 
 export default flightsRouter;
