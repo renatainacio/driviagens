@@ -22,7 +22,8 @@ async function create(flight) {
     await flightsRepository.create(flight);
 }
 
-async function getAllFlights(origin, destination, biggerDate, smallerDate){
+async function getAllFlights(origin, destination, biggerDate, smallerDate, page){
+    if (page && (isNaN(page) || page <= 0)) throw invalidPageValue();
     const Joi = joiBase.extend(joiDate);
     dayjs.extend(customParseFormat);
     if (biggerDate && smallerDate) {

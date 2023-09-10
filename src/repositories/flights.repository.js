@@ -34,13 +34,19 @@ async function getAllFlights(origin, destination, biggerDate, smallerDate){
         values.push(smallerDate);
         sql += `AND date >= $${values.length}`
     }
-    
+
+    let offset = "";
+    if (page){
+        offset += `OFFSET ${(page - 1) * 10} LIMIT 10`
+    }
+
     const flights = await db.query(`
         SELECT f.id, o.name AS origin, d.name AS destination, f.date
         FROM flights f, cities o, cities d
         WHERE o.id = f.origin
         AND d.id = f.destination ${sql}
         ORDER BY date
+        ${offset}
     `, values.length ? values : ""
     )
     return flights;

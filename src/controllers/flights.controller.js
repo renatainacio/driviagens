@@ -8,10 +8,10 @@ async function create(req, res) {
 }
 
 async function getAllFlights(req, res){
-    const { origin, destination } = req.query;
+    const { origin, destination, page } = req.query;
     const biggerDate = req.query['bigger-date'];
     const smallerDate = req.query['smaller-date'];
-    const flights = await flightsService.getAllFlights(origin, destination, biggerDate, smallerDate);
+    const flights = await flightsService.getAllFlights(origin, destination, biggerDate, smallerDate, page);
     res.send(flights);
 }
 
