@@ -15,7 +15,25 @@ async function findPassengerById(id){
     return passenger;    
 }
 
+async function getAllPassengersWithTotalTravels(partialName){
+    let sql = "";
+    if (partialName)
+        sql += `WHERE "firstName" ILIKE $1 OR "lastName" ILIKE $2`;
+
+    const passengers = await db.query(`
+        SELECT p."firstName" || ' ' || p."lastName" as "fullName" , COUNT(t.id) as travels
+        FROM passengers p
+        LEFT JOIN travels t
+        ON t."passengerId" = p.id
+        ${sql}
+        GROUP BY p.id
+        ORDER BY travels DESC
+    `, sql ? [`%${partialName}%`, `%${partialName}%`] : "");
+    return passengers;
+}
+
 export const passengersRepository = {
     create,
-    findPassengerById
+    findPassengerById,
+    getAllPassengersWithTotalTravels
 };
