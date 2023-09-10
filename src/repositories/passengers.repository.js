@@ -23,7 +23,6 @@ async function getAllPassengersWithTotalTravels(partialName, page){
     if (page){
         offset += `OFFSET ${(page - 1) * 10} LIMIT 10`
     }
-    console.log(offset);
     const passengers = await db.query(`
         SELECT p."firstName" || ' ' || p."lastName" as "fullName" , COUNT(t.id) as travels
         FROM passengers p
