@@ -8,9 +8,9 @@ async function create(req, res) {
 }
 
 async function getAllPassengersWithTotalTravels(req, res) {
-    const { name } = req.query;
-
-    const passengers = await passengersService.getAllPassengersWithTotalTravels(name);
+    const { name, page } = req.query;
+    
+    const passengers = await passengersService.getAllPassengersWithTotalTravels(name, page);
     res.send(passengers);
 }
 

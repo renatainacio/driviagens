@@ -15,11 +15,15 @@ async function findPassengerById(id){
     return passenger;    
 }
 
-async function getAllPassengersWithTotalTravels(partialName){
+async function getAllPassengersWithTotalTravels(partialName, page){
     let sql = "";
+    let offset = "";
     if (partialName)
         sql += `WHERE "firstName" ILIKE $1 OR "lastName" ILIKE $2`;
-
+    if (page){
+        offset += `OFFSET ${(page - 1) * 10} LIMIT 10`
+    }
+    console.log(offset);
     const passengers = await db.query(`
         SELECT p."firstName" || ' ' || p."lastName" as "fullName" , COUNT(t.id) as travels
         FROM passengers p
@@ -28,6 +32,7 @@ async function getAllPassengersWithTotalTravels(partialName){
         ${sql}
         GROUP BY p.id
         ORDER BY travels DESC
+        ${offset}
     `, sql ? [`%${partialName}%`, `%${partialName}%`] : "");
     return passengers;
 }

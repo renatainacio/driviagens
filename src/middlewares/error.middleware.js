@@ -24,5 +24,8 @@ export default function errorHandler(error, req, res, next) {
     if (error.type === "tooManyResults")
         return res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error.message);
 
+    if (error.type === "invalidPageValue")
+        return res.status(httpStatus.BAD_REQUEST).send(error.message);
+
     res.status(httpStatus.INTERNAL_SERVER_ERROR).send("Something went wrong.")
 }
