@@ -1,11 +1,11 @@
-export function conflictError(entity = "Dado") {
-    if (entity === "Voo")
+export function conflictError(entity = "Data") {
+    if (entity === "Flight")
         return {
             type: "conflict",
-            message: `${entity} deve ter destino diferente da origem!`
+            message: `${entity} must be different than the origin!`
         }
     return {
         type: "conflict",
-        message: `${entity} já cadastrado(a)!`
+        message: `${entity} already registered!`
     }
 }

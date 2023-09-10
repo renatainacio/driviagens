@@ -1,6 +1,6 @@
 export function invalidDateNewFlight() {
     return {
         type: "invalidDateNewFlight",
-        message: `A data não pode ser anterior à hoje!`
+        message: `The flight date must be set for a date after today!`
     }
 }

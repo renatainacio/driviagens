@@ -5,9 +5,9 @@ import { travelsRepository } from "../repositories/travels.repository.js";
 
 async function create(travel) {
     const flight = await flightsRepository.findFlightById(travel.flightId);
-    if (!flight.rows.length) throw notFoundError("Voo");
+    if (!flight.rows.length) throw notFoundError("Flight");
     const passenger = await passengersRepository.findPassengerById(travel.passengerId);
-    if (!passenger.rows.length) throw notFoundError("Passageiro");
+    if (!passenger.rows.length) throw notFoundError("Passenger");
     await travelsRepository.create(travel);
 }
 

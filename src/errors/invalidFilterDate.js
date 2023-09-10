@@ -1,6 +1,6 @@
 export function invalidFilterDate() {
     return {
         type: "invalidFilterDate",
-        message: "É necessário informar duas datas para filtrar os voos"
+        message: "You need to provide two dates to filter the flights."
     }
 }

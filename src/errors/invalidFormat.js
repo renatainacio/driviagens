@@ -1,6 +1,6 @@
-export function invalidFormatError(entity = "dado") {
+export function invalidFormatError(entity = "data") {
     return {
         type: "invalidFormat",
-        message: `Formato de ${entity} inválido!`
+        message: `Invalid ${entity} format!`
     }
 }

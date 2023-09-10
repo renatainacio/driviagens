@@ -13,11 +13,11 @@ import { invalidPageValue } from "../errors/invalidPageValue.js";
 import { invalidDateNewFlight } from "../errors/invalidDateNewFlight.js";
 
 async function create(flight) {
-    if (flight.origin === flight.destination) throw conflictError("Voo");
+    if (flight.origin === flight.destination) throw conflictError("Flight");
     const origin = await citiesRepository.findCityById(flight.origin);
     const destination = await citiesRepository.findCityById(flight.destination);
-    if (origin.rows.length === 0) throw notFoundError("Origem");
-    if (destination.rows.length === 0) throw notFoundError("Destino");
+    if (origin.rows.length === 0) throw notFoundError("Origin");
+    if (destination.rows.length === 0) throw notFoundError("Destination");
     dayjs.extend(customParseFormat);
     flight.date = dayjs(flight.date, "DD-MM-YYYY");
     if (flight.date.diff(dayjs(new Date())) < 0) throw invalidDateNewFlight();
@@ -30,10 +30,10 @@ async function getAllFlights(origin, destination, biggerDate, smallerDate, page)
     dayjs.extend(customParseFormat);
     if (biggerDate && smallerDate) {
         let validation = Joi.date().format('DD-MM-YYYY').validate(biggerDate);
-        if (validation.error) throw invalidFormatError("data");
+        if (validation.error) throw invalidFormatError("date");
         biggerDate = dayjs(biggerDate, "DD-MM-YYYY");
         validation = Joi.date().format('DD-MM-YYYY').validate(smallerDate);
-        if (validation.error) throw invalidFormatError("data");
+        if (validation.error) throw invalidFormatError("date");
         smallerDate = dayjs(smallerDate, "DD-MM-YYYY");
         if (biggerDate.diff(smallerDate) < 0) throw biggerDateBeforeSmaller();
     }

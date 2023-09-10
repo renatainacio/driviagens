@@ -3,7 +3,7 @@ import { citiesRepository } from "../repositories/cities.repository.js";
 
 async function create(city) {
     const findCity = await citiesRepository.findCityByName(city.name);
-    if (findCity.rows.length) throw conflictError("Cidade");
+    if (findCity.rows.length) throw conflictError("City");
     await citiesRepository.create(city);
 }
 
