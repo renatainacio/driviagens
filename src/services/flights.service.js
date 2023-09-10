@@ -37,7 +37,7 @@ async function getAllFlights(origin, destination, biggerDate, smallerDate, page)
         if (biggerDate.diff(smallerDate) < 0) throw biggerDateBeforeSmaller();
     }
     else if (smallerDate || biggerDate) throw invalidFilterDate();
-    const flights = await flightsRepository.getAllFlights(origin, destination, biggerDate, smallerDate);
+    const flights = await flightsRepository.getAllFlights(origin, destination, biggerDate, smallerDate, page);
     flights.rows.forEach(flight => flight.date = dayjs(flight.date).format('DD-MM-YYYY'));
     return flights.rows;
 }

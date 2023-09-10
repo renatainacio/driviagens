@@ -39,7 +39,6 @@ async function getAllFlights(origin, destination, biggerDate, smallerDate, page)
     if (page){
         offset += `OFFSET ${(page - 1) * 10} LIMIT 10`
     }
-
     const flights = await db.query(`
         SELECT f.id, o.name AS origin, d.name AS destination, f.date
         FROM flights f, cities o, cities d
