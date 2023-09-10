@@ -9,6 +9,6 @@ const connectionConfig = {
     connectionString: process.env.DATABASE_URL
 };
 
-if (process.env.MODE === 'production') connectionConfig.ssl = true;
+if (process.env.NODE_ENV === 'production') connectionConfig.ssl = true;
 
 export const db = new Pool(connectionConfig);
